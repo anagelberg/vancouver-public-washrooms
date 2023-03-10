@@ -14,7 +14,7 @@ bathroom_data = bathroom_data %>%
 
 # TODO: change color based on if currently Open 
 # TODO: Make the map pop ups
-# TODO: Include a way to link 
+# TODO: Include a way to link to Google Maps
 # TODO: filter bathrooms shown based on requirements
 # TODO: Fix the error at sign in (need location) to a loading bar. 
 
@@ -71,7 +71,12 @@ server <- function(input, output) {
       content <- paste(sep = "<br/>",
                        paste0("<b>", data$NAME, "</b>"), 
                        data$ADDRESS, 
-                       data$LOCATION
+                       data$LOCATION, 
+                       paste0("Wheel access: ", data$WHEEL_ACCESS), 
+                       paste0("Summer Hours: ", data$SUMMER_HOURS), 
+                       paste0("Winter Hours: ", data$WINTER_HOURS), 
+                       paste0("Note: ", data$NOTE),
+                       paste0("<a href='https://www.google.com/maps/search/?api=1&query=", data$Lat, ",", data$Long, "'>Load Location in Google Maps</a>")
       )
       return(content)
     }
