@@ -3,7 +3,7 @@ This is an R-shiny application displaying the public and park washroom data for 
 
 You can run the application at this link: https://anagelberg.shinyapps.io/vancouver-public-washrooms/
 
-<img src='imgs/full-photo.png'>
+<a href="https://anagelberg.shinyapps.io/vancouver-public-washrooms/"><img src='imgs/full-photo.png'></a>
 
 The application currently displays data about selected washrooms and allows you to find washrooms close to your location. 
 
