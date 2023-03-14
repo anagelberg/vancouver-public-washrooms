@@ -5,5 +5,6 @@ You can run the application at this link: https://anagelberg.shinyapps.io/vancou
 
 <img src='imgs/full-photo.png'>
 
+The application currently displays data about selected washrooms and allows you to find washrooms close to your location. 
 
 Currently in development. 
