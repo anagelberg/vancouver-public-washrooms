@@ -1,0 +1,13 @@
+name: vancouver-public-washrooms
+title: vancouver-public-washrooms
+username:
+account: anagelberg
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 8569045
+bundleId: 6958412
+url: https://anagelberg.shinyapps.io/vancouver-public-washrooms/
+when: 1678828614.72292
+lastSyncTime: 1678828614.72293
+asMultiple: FALSE
+asStatic: FALSE

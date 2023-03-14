@@ -8,8 +8,9 @@ bathroom_data = read_delim("public-washrooms.csv", delim=";")
 bathroom_data = bathroom_data %>%
                 separate_wider_delim(geo_point_2d, ", ", names=c("Lat", "Long")) %>%
                 mutate(Lat = as.numeric(Lat)) %>%
-                mutate(Long = as.numeric(Long))
-
+                mutate(Long = as.numeric(Long)) %>% 
+                mutate(wheel_access = ifelse(tolower(substr(WHEEL_ACCESS, 1, 1)) == "y", TRUE, FALSE)) %>% 
+                mutate(caretaker = ifelse(grepl('Caretaker on site', NOTE, fixed=TRUE), TRUE, FALSE))
 
 
 # TODO: filter bathrooms shown based on requirements
@@ -19,9 +20,9 @@ ui <- bootstrapPage(
 
       tags$head(
         tags$link(href = "https://fonts.googleapis.com/css?family=Oswald", rel = "stylesheet"),
-        tags$style(type = "text/css", "html, body {width:100%;height:100%; font-family: Oswald, sans-serif;}")#,
+        tags$style(type = "text/css", "html, body {width:100%;height:100%; font-family: Arial, sans-serif;}")#,
       ),
-      # This script gets the users location
+      # This javascript script gets the users location
       tags$script('
       $(document).ready(function () {
         navigator.geolocation.getCurrentPosition(onSuccess, onError);
@@ -51,7 +52,7 @@ ui <- bootstrapPage(
     absolutePanel(
       top = 10, right = 10, style = "z-index:500; text-align: right;",
       tags$h1("Public Washrooms in Vancouver, BC"),
-      tags$a("About this tool", href="")
+      tags$a("About this tool", href="https://github.com/anagelberg/vancouver-public-washrooms")
     ),
 
     # Left filtering panel
@@ -95,7 +96,7 @@ server <- function(input, output, session) {
         shiny::validate(
           need(input$geolocation, message = FALSE)
         )
-    
+
         leafletProxy("bathroom_map", session) %>%
           setView(input$long, input$lat, zoom=15) %>% #current location
           addCircles(input$long, input$lat) #current location
@@ -103,7 +104,7 @@ server <- function(input, output, session) {
         error=function(e) {
           showModal(modalDialog(title = "Sorry!",
                                 tags$p("We couldn't fetch your location."),
-                                tags$p("Please ensure you've allowed location sharing."), 
+                                tags$p("Please ensure you've allowed location sharing."),
                                 tags$p("You may need to refresh your browser after clicking 'allow'")))
         }
 
